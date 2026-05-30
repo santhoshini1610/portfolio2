@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuniki Santhoshini — Data Science Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0d0d; --bg2: #141414; --bg3: #1a1a1a;
+    --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
+    --text: #f0ede8; --muted: #888882;
+    --accent: #c8f542; --accent2: #a8d830;
+    --accent-dim: rgba(200,245,66,0.08); --accent-dim2: rgba(200,245,66,0.14);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.65; min-height: 100vh; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px; pointer-events: none; z-index: 0;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(13,13,13,0.88); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); padding: 14px 0; }
+  .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-family: var(--serif); font-size: 16px; color: var(--accent); }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .hero { padding: 100px 0 80px; border-bottom: 1px solid var(--border); }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(200,245,66,0.2);
+    border-radius: 100px; padding: 5px 14px; margin-bottom: 28px;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  .hero h1 { font-family: var(--serif); font-size: clamp(42px, 7vw, 72px); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; color: var(--muted); }
+  .hero-desc { font-size: 16px; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 36px; }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0d0d0d; font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: 8px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text); font-size: 13px; padding: 10px 20px; border: 1px solid var(--border2); border-radius: 8px; text-decoration: none; transition: border-color 0.2s, transform 0.15s; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-1px); }
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 60px 0; background: var(--bg2); }
+  .stat { padding: 24px 20px; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-n { font-family: var(--serif); font-size: 36px; color: var(--accent); line-height: 1; }
+  .stat-l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+  .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
+  .sec-num { font-size: 11px; font-weight: 500; color: var(--accent); letter-spacing: 0.1em; min-width: 28px; }
+  .sec-title { font-family: var(--serif); font-size: 30px; font-weight: 400; }
+  .about-text { font-size: 18px; line-height: 1.75; color: var(--muted); max-width: 680px; }
+  .about-text strong { color: var(--text); font-weight: 500; }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .skill-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; transition: border-color 0.2s; }
+  .skill-card:hover { border-color: var(--border2); }
+  .skill-card-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12px; padding: 4px 11px; border-radius: 100px; border: 1px solid var(--border2); color: var(--muted); background: var(--bg3); transition: border-color 0.2s, color 0.2s; }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .exp-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 28px 28px; position: relative; overflow: hidden; }
+  .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); }
+  .exp-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; gap: 8px; }
+  .exp-title { font-size: 17px; font-weight: 500; }
+  .exp-badge { font-size: 11px; padding: 4px 12px; border-radius: 100px; background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,245,66,0.2); white-space: nowrap; }
+  .exp-org { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .exp-bullets { padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .exp-bullets li { font-size: 14px; color: var(--muted); }
+  .exp-bullets li::marker { color: var(--accent); }
+  .projects-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .proj-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 26px 28px; transition: border-color 0.25s, transform 0.2s; }
+  .proj-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .proj-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
+  .proj-title { font-size: 17px; font-weight: 500; }
+  .proj-tech { display: flex; gap: 6px; flex-wrap: wrap; }
+  .proj-tech span { font-size: 11px; padding: 3px 10px; border-radius: 100px; background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,245,66,0.15); }
+  .proj-desc { font-size: 13px; font-style: italic; color: var(--muted); margin-bottom: 14px; }
+  .proj-bullets { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .proj-bullets li { font-size: 14px; color: var(--muted); }
+  .proj-bullets li::marker { color: var(--accent); }
+  .edu-card { display: flex; justify-content: space-between; align-items: flex-start; background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 26px 28px; flex-wrap: wrap; gap: 16px; }
+  .edu-title { font-size: 17px; font-weight: 500; margin-bottom: 6px; }
+  .edu-sub { font-size: 14px; color: var(--muted); }
+  .edu-date { font-size: 13px; color: var(--muted); margin-bottom: 8px; text-align: right; }
+  .cgpa-pill { display: inline-block; font-size: 13px; font-weight: 500; background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(200,245,66,0.2); padding: 5px 16px; border-radius: 100px; }
+  .cert-list { display: flex; flex-direction: column; gap: 12px; }
+  .cert-item { display: flex; justify-content: space-between; align-items: center; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 22px; flex-wrap: wrap; gap: 8px; transition: border-color 0.2s; }
+  .cert-item:hover { border-color: var(--border2); }
+  .cert-name { font-size: 15px; font-weight: 500; }
+  .cert-org { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .cert-yr { font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-dim); padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(200,245,66,0.15); }
+  footer { padding: 48px 0 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.7s ease both; }
+  .hero-tag { animation-delay: 0.05s; } .hero h1 { animation-delay: 0.15s; } .hero-desc { animation-delay: 0.25s; } .hero-links { animation-delay: 0.35s; }
+  @media (max-width: 640px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--border); }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <span class="nav-logo">TS ✦</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-tag">Open to opportunities</div>
+    <h1>Tuniki<br><em>Santhoshini</em></h1>
+    <p class="hero-desc">Data Science engineer with hands-on experience in deep learning, computer vision, and full-stack data pipelines. Passionate about building AI-powered solutions that solve real-world problems.</p>
+    <div class="hero-links">
+      <a class="btn-primary" href="mailto:tunikisanthoshini@gmail.com">✉ tunikisanthoshini@gmail.com</a>
+      <a class="btn-ghost" href="https://www.linkedin.com/in/tuniki-santhoshini-84b0262b5/" target="_blank">LinkedIn ↗</a>
+      <a class="btn-ghost" href="https://github.com/santhoshinie1610" target="_blank">GitHub ↗</a>
+      <a class="btn-ghost" href="tel:+919347970154">+91 93479 70154</a>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">Projects built</div></div>
+    <div class="stat"><div class="stat-n">3+</div><div class="stat-l">Certifications</div></div>
+    <div class="stat"><div class="stat-n">7.21</div><div class="stat-l">CGPA</div></div>
+    <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Technologies</div></div>
+  </div>
+</div>
+
+<div class="wrap" id="about">
+  <section>
+    <div class="sec-header"><span class="sec-num">01</span><h2 class="sec-title">About</h2></div>
+    <p class="about-text">I'm an <strong>enthusiastic Data Science candidate</strong> with a strong foundation in Data Structures, Object-Oriented Programming, and Database Design. Proficient in <strong>Python and SQL</strong>, with hands-on experience in data analysis and visualization using <strong>Power BI</strong>. I love applying data-driven approaches to solve problems that matter — from phishing detection to AI image captioning.</p>
+  </section>
+</div>
+
+<div class="wrap" id="skills">
+  <section>
+    <div class="sec-header"><span class="sec-num">02</span><h2 class="sec-title">Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-label">Languages</div>
+        <div class="chip-row"><span class="chip">C</span><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">Java</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">SQL</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Frameworks & Libraries</div>
+        <div class="chip-row"><span class="chip">TensorFlow</span><span class="chip">Keras</span><span class="chip">Scikit-learn</span><span class="chip">FastAPI</span><span class="chip">Django</span><span class="chip">React.js</span><span class="chip">OpenCV</span><span class="chip">MediaPipe</span><span class="chip">XGBoost</span><span class="chip">Pandas</span><span class="chip">NumPy</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Tools & Platforms</div>
+        <div class="chip-row"><span class="chip">Power BI</span><span class="chip">Figma</span><span class="chip">Excel</span><span class="chip">VS Code</span><span class="chip">Jupyter</span><span class="chip">Google Colab</span><span class="chip">GitHub</span><span class="chip">Node.js</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-label">Databases & Soft Skills</div>
+        <div class="chip-row"><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Analytical thinking</span><span class="chip">Leadership</span><span class="chip">Problem solving</span><span class="chip">Adaptability</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="experience">
+  <section>
+    <div class="sec-header"><span class="sec-num">03</span><h2 class="sec-title">Experience</h2></div>
+    <div class="exp-card">
+      <div class="exp-head">
+        <div class="exp-title">Google AI-ML Virtual Internship</div>
+        <span class="exp-badge">Apr – Jun 2024</span>
+      </div>
+      <div class="exp-org">AICTE–Eduskills · Online</div>
+      <ul class="exp-bullets">
+        <li>Built Deep Learning models (CNNs, RNNs) and supervised learning models using TensorFlow, Keras, and Scikit-learn.</li>
+        <li>Engineered end-to-end data pipelines incorporating preprocessing, feature engineering, and K-Means clustering for pattern detection.</li>
+        <li>Deployed scalable AI solutions for Computer Vision and NLP tasks on Google Cloud Platform (GCP).</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="projects">
+  <section>
+    <div class="sec-header"><span class="sec-num">04</span><h2 class="sec-title">Projects</h2></div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-head">
+          <div class="proj-title">Restaurant Database System</div>
+          <div class="proj-tech"><span>MySQL</span><span>Java</span></div>
+        </div>
+        <div class="proj-desc">Structured relational database to efficiently manage restaurant data with seamless Java backend integration.</div>
+        <ul class="proj-bullets">
+          <li>Designed a normalized relational database schema to manage restaurant operations and data efficiently.</li>
+          <li>Implemented optimized SQL queries to ensure fast data retrieval and maintain data integrity.</li>
+          <li>Built the database architecture to support seamless integration with a Java-based backend application.</li>
+        </ul>
+      </div>
+      <div class="proj-card">
+        <div class="proj-head">
+          <div class="proj-title">Image Captioning Model</div>
+          <div class="proj-tech"><span>CNN–RNN</span><span>Deep Learning</span><span>Computer Vision</span></div>
+        </div>
+        <div class="proj-desc">AI-driven image captioning system using CNN–RNN architecture to generate meaningful captions for images.</div>
+        <ul class="proj-bullets">
+          <li>Combined convolutional neural networks for visual feature extraction with recurrent neural networks for text generation.</li>
+          <li>Demonstrated practical application of machine learning and computer vision in a real-world setting.</li>
+        </ul>
+      </div>
+      <div class="proj-card">
+        <div class="proj-head">
+          <div class="proj-title">Phishing URL Detection System</div>
+          <div class="proj-tech"><span>Python</span><span>Flask</span><span>Logistic Regression</span></div>
+        </div>
+        <div class="proj-desc">Real-time web application classifying phishing URLs via Logistic Regression, deployed with a Flask RESTful API.</div>
+        <ul class="proj-bullets">
+          <li>Built phishing URL detection with Logistic Regression and lexical feature engineering to classify URLs as legitimate or malicious.</li>
+          <li>Deployed with Flask RESTful API for efficient real-time predictions and secure third-party integration.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="education">
+  <section>
+    <div class="sec-header"><span class="sec-num">05</span><h2 class="sec-title">Education</h2></div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-title">B.Tech in Computer Science & Engineering (Data Science)</div>
+        <div class="edu-sub">Geethanjali College of Engineering and Technology, Hyderabad</div>
+      </div>
+      <div>
+        <div class="edu-date">2022 – 2026</div>
+        <span class="cgpa-pill">CGPA 7.21</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="certifications">
+  <section>
+    <div class="sec-header"><span class="sec-num">06</span><h2 class="sec-title">Certifications</h2></div>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div><div class="cert-name">IoT Edge Computing & IoT Analytics</div><div class="cert-org">Infosys Springboard</div></div>
+        <span class="cert-yr">2025</span>
+      </div>
+      <div class="cert-item">
+        <div><div class="cert-name">Data Visualization</div><div class="cert-org">Tata (Forage)</div></div>
+        <span class="cert-yr">2024</span>
+      </div>
+      <div class="cert-item">
+        <div><div class="cert-name">Java Fundamentals & Advanced Java Programming</div><div class="cert-org">Oracle Academy</div></div>
+        <span class="cert-yr">2023</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <span class="footer-copy">© 2026 Tuniki Santhoshini</span>
+    <div class="footer-links">
+      <a href="mailto:tunikisanthoshini@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/tuniki-santhoshini-84b0262b5/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/santhoshinie1610" target="_blank">GitHub</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
